@@ -1,5 +1,9 @@
 #################################
 
+# import math
+# OR
+# from math import *
+
 
 # Strings 
 myString = "Hello World"
@@ -14,6 +18,7 @@ print x + y
 # Arrays
 
 arr = [1, 2, 3, 4]
+mat = [1, 2; 3, 4]
 
 print arr
 
