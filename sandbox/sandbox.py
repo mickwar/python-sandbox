@@ -4,6 +4,9 @@
 # OR
 # from math import *
 
+import random
+from math import *
+
 
 # Strings 
 myString = "Hello World"
@@ -18,13 +21,16 @@ print x + y
 # Arrays
 
 arr = [1, 2, 3, 4]
-mat = [1, 2; 3, 4]
+mat = [[1, 2], [3, 4]]
 
 print arr
 
 # Loops
 
 for x in arr:
+    print x
+
+for x in mat:
     print x
 
 # Conditionals
