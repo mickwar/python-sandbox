@@ -1,9 +1,7 @@
 # A Bayesian Gaussian process model fit via MCMC
 import random
 import numpy as np
-import scipy as sc
-import scipy.stats
-import matplotlib as mpl
+import scipy.stats as sc
 import matplotlib.pyplot as plt
 
 random.seed(1)
@@ -71,12 +69,12 @@ def calc_post(x, y, d, params):
     # likelihood
     out = -0.5 * np.log(np.linalg.det(sigma)) - 0.5 * (y-mu).T * (sigma.I * (y-mu))
     # priors
-    out += scipy.stats.norm.logpdf(params[0], 0, 1)
-    out += scipy.stats.norm.logpdf(params[1], 0, 1)
-    out += scipy.stats.norm.logpdf(params[2], 0, 1)
-    out += scipy.stats.gamma.logpdf(params[3], a=1, scale=1)
-    out += scipy.stats.gamma.logpdf(params[4], a=1, scale=1)
-    out += scipy.stats.gamma.logpdf(params[5], a=1, scale=1)
+    out += sc.norm.logpdf(params[0], 0, 1)
+    out += sc.norm.logpdf(params[1], 0, 1)
+    out += sc.norm.logpdf(params[2], 0, 1)
+    out += sc.gamma.logpdf(params[3], a=1, scale=1)
+    out += sc.gamma.logpdf(params[4], a=1, scale=1)
+    out += sc.gamma.logpdf(params[5], a=1, scale=1)
     return (out)
 
 
@@ -138,17 +136,18 @@ accept = accept[nburn:,]
 
 sigs
 
+plt.ion()   # turn on interactive mode (retains control to console)
+plt.cla()
 plt.plot(params[:,0])
 plt.plot(params[:,1])
 plt.plot(params[:,2])
 plt.plot(params[:,3])
 plt.plot(params[:,4])
 plt.plot(params[:,5])
-plt.show()
 
+plt.cla()   # clear the axes
 plt.plot(x, y, '+')
 plt.grid()
-plt.show()
 
 ### posterior predictions
 
@@ -184,9 +183,11 @@ pred_upper = np.percentile(pred_y, 97.5, axis = 0)
 pred_lower = np.percentile(pred_y, 2.5, axis = 0)
 
 #plt.plot(pred_x, pred_y[range(50),].T, color='#1e90ff')
+plt.cla()
 plt.plot(pred_x, pred_mean, color='#1e90ff')
 plt.plot(pred_x, pred_upper, color='#bbbbbb')
 plt.plot(pred_x, pred_lower, color='#bbbbbb')
 plt.plot(x, y, color="#000000", linewidth=0, marker='+', markersize=10, markeredgewidth=3)
+plt.axis([-5, 5, -4, 10])
 plt.show()
 
